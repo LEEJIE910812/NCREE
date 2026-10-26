@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="NCREE t0227 interactive AE source locations: Way1 and Way3, time and depth views.">
+  <title>t0227 | NCREE AE Location</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/lucide.min.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="identity"><span class="wordmark">NCREE</span><span class="divider" aria-hidden="true"></span><h1>t0227</h1><span class="project-label">AE Location</span></div>
+    <a class="icon-button repository-link" href="https://github.com/LEEJIE910812/NCREE" target="_blank" rel="noopener noreferrer" title="GitHub repository" aria-label="GitHub repository"><i data-lucide="github" aria-hidden="true"></i></a>
+  </header>
+  <nav class="toolbar" aria-label="Location views">
+    <div class="view-controls">
+      <div class="segmented" role="group" aria-label="Location method">
+        <button type="button" data-method="way1" aria-pressed="true">Way1</button>
+        <button type="button" data-method="way3" aria-pressed="false">Way3</button>
+      </div>
+      <span class="toolbar-divider" aria-hidden="true"></span>
+      <div class="segmented" role="group" aria-label="Color variable">
+        <button type="button" data-view="time" aria-pressed="true"><i data-lucide="clock-3" aria-hidden="true"></i><span>Time</span></button>
+        <button type="button" data-view="depth" aria-pressed="false"><i data-lucide="layers" aria-hidden="true"></i><span>Depth</span></button>
+      </div>
+    </div>
+    <div class="tools" role="group" aria-label="Viewer actions">
+      <button class="icon-button" id="reset-camera" type="button" title="Reset camera" aria-label="Reset camera" disabled><i data-lucide="rotate-ccw" aria-hidden="true"></i></button>
+      <button class="icon-button" id="reload-view" type="button" title="Reload view" aria-label="Reload view"><i data-lucide="refresh-cw" aria-hidden="true"></i></button>
+      <button class="icon-button" id="fullscreen" type="button" title="Fullscreen" aria-label="Fullscreen"><i data-lucide="maximize" aria-hidden="true"></i></button>
+      <a class="icon-button" id="open-view" href="views/way1/time.html" target="_blank" rel="noopener" title="Open view in new tab" aria-label="Open view in new tab"><i data-lucide="external-link" aria-hidden="true"></i></a>
+      <a class="icon-button" id="download-view" href="views/way1/time.html" download="t0227-way1-time.html" title="Download HTML" aria-label="Download HTML"><i data-lucide="download" aria-hidden="true"></i></a>
+    </div>
+  </nav>
+  <main class="viewer-stage" id="viewer-stage" aria-busy="true">
+    <iframe id="viewer" title="t0227 Way1 time view" allow="fullscreen" referrerpolicy="no-referrer"></iframe>
+    <div class="load-overlay" id="load-overlay">
+      <div class="load-content" role="status" aria-live="polite">
+        <span class="spinner" id="spinner" aria-hidden="true"></span>
+        <h2 id="load-title">Loading Way1 / Time</h2>
+        <p id="load-message">Loading experiment data...</p>
+        <button class="retry-button" id="retry" type="button" hidden><i data-lucide="refresh-cw" aria-hidden="true"></i><span>Retry</span></button>
+      </div>
+    </div>
+    <noscript><div class="noscript-message">JavaScript is required to display the interactive location data.</div></noscript>
+  </main>
+  <footer class="status-bar">
+    <span class="status" id="status" role="status"><span class="status-dot" aria-hidden="true"></span><span id="status-text">Loading</span></span>
+    <span id="view-label">Way1 / Time</span>
+    <span class="experiment-label">Experiment t0227</span>
+  </footer>
+</body>
+</html>
