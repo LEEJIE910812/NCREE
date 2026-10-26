@@ -83,6 +83,7 @@
     });
     window.Plotly.relayout(graph, {
       "scene.camera": JSON.parse(JSON.stringify(originalCamera)),
+      "scene.yaxis.range": [...graph.layout.scene.yaxis.range].sort((a, b) => a - b),
       "updatemenus[0].buttons": buttons,
       "sliders[0].steps": steps,
     }).then(fitPlot).then(() => {
