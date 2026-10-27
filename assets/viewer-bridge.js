@@ -36,9 +36,9 @@
       "title.text": plotTitle(),
       "title.font.size": compact ? 11 : 16,
       margin: { l: compact ? 24 : 30, r: compact ? 6 : 110, t: compact ? 55 : 35, b: 140 },
-      "scene.domain": { x: [0, compact ? 1 : 0.82], y: [0.09, 0.98] },
+      "scene.domain": { x: [0, compact ? 0.9 : 0.82], y: [0.09, 0.98] },
       "legend.x": compact ? 0 : 0.86,
-      "legend.y": compact ? 1.12 : 0.98,
+      "legend.y": compact ? 1.04 : 0.98,
       "legend.orientation": compact ? "h" : "v",
       "legend.font.size": compact ? 10 : 12,
       "sliders[0].x": compact ? 0.06 : 0.18,
@@ -66,8 +66,13 @@
       else report("error", "The plot could not finish initializing.");
       return;
     }
-    originalCamera = JSON.parse(JSON.stringify(graph.layout.scene.camera));
-    const cameraScale = innerWidth < 700 ? 1.28 : 1.12;
+    // Match the MP4 viewing side: +X right, +Y receding, +Z up.
+    originalCamera = {
+      eye: { x: 0.765, y: -2.353, z: 0.804 },
+      up: { x: 0, y: 0, z: 1 },
+      center: { x: 0, y: 0, z: -0.18 },
+    };
+    const cameraScale = innerWidth < 700 ? 1.45 : 1.12;
     for (const axis of ["x", "y", "z"]) originalCamera.eye[axis] *= cameraScale;
     const buttons = graph.layout.updatemenus[0].buttons.map(button => button.method === "animate" ? { ...button, method: "skip" } : button);
     const steps = graph.layout.sliders[0].steps.map(step => step.method === "animate" ? { ...step, method: "skip" } : step);
@@ -79,7 +84,10 @@
     });
     graph.on("plotly_afterplot", () => {
       const title = plotTitle();
-      if (title !== graph.layout.title.text) window.Plotly.relayout(graph, { "title.text": title }).catch(() => {});
+      const titleSize = innerWidth < 700 ? 11 : 16;
+      if (title !== graph.layout.title.text || graph.layout.title.font.size !== titleSize) {
+        window.Plotly.relayout(graph, { "title.text": title, "title.font.size": titleSize }).catch(() => {});
+      }
     });
     window.Plotly.relayout(graph, {
       "scene.camera": JSON.parse(JSON.stringify(originalCamera)),
